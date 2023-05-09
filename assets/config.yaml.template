@@ -1,0 +1,39 @@
+####################################   配置   ###################################
+# items每组代表一个工具项
+# default组除外，它定义了一些默认值
+# * name: 工具项标签
+# * image: 工具项图片
+# * cmd: 启动命令
+# * type: 对应core部分的某个type
+# * borders: 上下左右四个方向的边框宽度
+################################################################################
+
+items:
+- name: default
+  image: null
+  cmd: null
+  type: null
+  path: null
+  env: null
+  borders:
+    left: {left}
+    right: {right}
+    top: {top}
+    bottom: {bottom}
+
+- name: 配置
+  image: assets/images/config.png
+  cmd: notepad.exe config.yaml
+  type: Notepad
+
+-
+  name: Cygwin
+  image: assets/images/cygwin.png
+  cmd:  /path/to/cygwin/bin/mintty.exe -
+  type: Cygwin
+
+-
+  name: Putty
+  image: assets/images/putty.png
+  cmd:  /path/to/putty/PUTTY.EXE -ssh -l 用户名 -P 22 -pw 密码 IP地址
+  type: PuTTY

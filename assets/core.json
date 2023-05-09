@@ -1,0 +1,14 @@
+{
+    "Notepad": {
+        "class_name": "Notepad",
+        "process_keys": ["notepad.exe"]
+    },
+    "PuTTY": {
+        "class_name": "PuTTY",
+        "process_keys": ["putty.exe"]
+    },
+    "Cygwin": {
+        "class_name": "mintty",
+        "process_keys": ["mintty.exe", "bash.exe", "conhost.exe"]
+    }
+}
