@@ -50,8 +50,6 @@ import win32gui
 from pynput import keyboard
 from threading import Thread
 from widgets.Notebook import Notebook
-from widgets.TitleBar import TitleBar
-from widgets.FrameLess import FrameLessFrame
 from widgets.MessageDialog import MessageDialog
 from utils.StartExe import StartExeThread, KillPids
 from widgets.VScrolledToolBar import VScrolledToolBar
@@ -149,7 +147,7 @@ class ListenKeyThread(Thread):
 ################################################################################
 # 主界面
 ################################################################################
-class Frame(FrameLessFrame):
+class Frame(wx.Frame):
     def __init__(self, parent):
         super().__init__(parent)
         self.__OnInit()
@@ -206,7 +204,6 @@ class Frame(FrameLessFrame):
 
     def __CreateWidgets(self):
         '''构造主框架'''
-        self.titlerBar = TitleBar(self)
         self.contentPanel = wx.Panel(self, style=wx.BORDER_NONE)
         self.contentPanel.SetBackgroundColour(self.settings['border_colour'])
         self.toolBar = self.__CreateToolBar(self.contentPanel)
@@ -239,13 +236,13 @@ class Frame(FrameLessFrame):
     def __Layout(self):
         '''布局'''
         csizer = wx.BoxSizer(wx.HORIZONTAL)
+        csizer.AddSpacer(1)
         csizer.Add(self.toolBar, 0, wx.EXPAND | wx.ALL, 1)
         csizer.Add(self.notebook, 1, wx.EXPAND | wx.ALL & (~wx.LEFT), 1)
         self.contentPanel.SetSizer(csizer)
 
         sizer = wx.BoxSizer(wx.VERTICAL)
-        sizer.Add(self.titlerBar, 0, wx.EXPAND)
-        sizer.Add(self.contentPanel, 1, wx.EXPAND | wx.ALL & (~wx.TOP), 5)
+        sizer.Add(self.contentPanel, 1, wx.EXPAND)
         self.SetSizer(sizer)
 
     def __Bind(self):
