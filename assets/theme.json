@@ -5,36 +5,6 @@
         "background_colour": "#212021",
         "border_colour": "#FFFFFF"
     },
-    "titlebar": {
-        "background_colour": "#212021",
-        "foreground_colour": "#FFFFFF",
-        "box_width": 32,
-        "box_height": 32,
-        "minimize_box": {
-            "colour": "#212021",
-            "image": "assets/images/minimize.png",
-            "enter_colour": "#414141",
-            "enter_image": "assets/images/minimize.png"
-        },
-        "maximize_box": {
-            "colour": "#212021",
-            "image": "assets/images/maximize.png",
-            "enter_colour": "#414141",
-            "enter_image": "assets/images/maximize.png"
-        },
-        "normalize_box": {
-            "colour": "#212021",
-            "image": "assets/images/normalize.png",
-            "enter_colour": "#414141",
-            "enter_image": "assets/images/normalize.png"
-        },
-        "close_box": {
-            "colour": "#212021",
-            "image": "assets/images/close.png",
-            "enter_colour": "#E81123",
-            "enter_image": "assets/images/close.png"
-        }
-    },
     "toolbar": {
         "background_colour": "#212021",
         "foreground_colour": "#FFFFFF",

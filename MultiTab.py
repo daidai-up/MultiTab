@@ -47,11 +47,12 @@ import logging
 import win32api
 import win32con
 import win32gui
-from pynput import keyboard
-from threading import Thread
+
+from utils.UI import GetBorders, ListenKeyThread
+from utils.StartExe import StartExeThread, KillPids
+
 from widgets.Notebook import Notebook
 from widgets.MessageDialog import MessageDialog
-from utils.StartExe import StartExeThread, KillPids
 from widgets.VScrolledToolBar import VScrolledToolBar
 from wx.lib.agw.flatnotebook import EVT_FLATNOTEBOOK_PAGE_CLOSING
 
@@ -65,6 +66,7 @@ CORE_FILE = os.path.join(ASSETS_PATH, 'core.json')
 CONFIG_TEMPLATE_FILE = os.path.join(ASSETS_PATH, 'config.yaml.template')
 CONFIG_FILE_NAME = 'config.yaml'
 CONFIG_FILE = os.path.join(BASE_PATH, CONFIG_FILE_NAME)
+# 日志
 LOG_PATH = os.path.join(BASE_PATH, 'logs')
 if not os.path.exists(LOG_PATH):
     os.mkdir(LOG_PATH)
@@ -74,9 +76,12 @@ logging.basicConfig(
     handlers=(file_handler, ), level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S',
     format='[%(asctime)s] [%(filename)s:%(lineno)d] [%(levelname)s]:  %(message)s',
 )
-logger = logging.getLogger(__name__)  # 日志
+logger = logging.getLogger(__name__)
 
 
+################################################################################
+# 配置文件
+################################################################################
 def GetConfigurations():
     '''初始化配置'''
     configurations = {}
@@ -110,38 +115,6 @@ def FillConfigurationDefaults(configurations):
         for key, value in defaultItem.items():
             if key not in item:
                 item[key] = value
-
-
-################################################################################
-def GetBorders():
-    '''获取普通窗口边框宽度'''
-    frame = wx.Frame(None)
-    frame.Hide()
-    w, h = frame.GetSize()
-    cw, ch = frame.GetClientSize()
-    left = right = bottom = (w - cw) // 2
-    top = h - ch - bottom
-    frame.Close()
-    return {'top': top, 'bottom': bottom, 'left': left, 'right': right}
-
-
-class ListenKeyThread(Thread):
-    '''监控热键线程'''
-    def __init__(self):
-        super().__init__(daemon=True)
-        self._hotkeys = {}
-
-    def AddHotKey(self, hotKey, callback):
-        '''热键=>回调'''
-        self._hotkeys[hotKey] = callback
-
-    def Start(self):
-        '''Rename'''
-        self.start()
-
-    def run(self):
-        with keyboard.GlobalHotKeys(self._hotkeys, daemon=True) as ghk:
-            ghk.join()
 
 
 ################################################################################

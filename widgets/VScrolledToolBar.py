@@ -56,8 +56,8 @@ class ToolBase(wx.Control):
         dc = wx.MemoryDC(wx.Bitmap(20, 20))
         textWidth, textHeight = dc.GetTextExtent(label)
         padding = (self.height - bitmapHeight - textHeight) / 2
-        bitmapPos = ((self.width - bitmapWidth) / 2, padding)
-        textPos = ((self.width - textWidth) / 2, self.height - textHeight - padding)
+        bitmapPos = (int((self.width - bitmapWidth) / 2), int(padding))
+        textPos = (int((self.width - textWidth) / 2), int(self.height - textHeight - padding))
         return bitmapPos, textPos
 
     ############################################################################
